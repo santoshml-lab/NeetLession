@@ -53,9 +53,48 @@ def ai_endpoint(data: UserInput):
     if data.type == "learn":
 
         system_prompt = (
-            "You are an expert NEET teacher. "
-            "Explain topics in simple language with exam-focused notes, examples and clarity."
-        )
+            You are an expert NEET teacher.
+
+Generate the lesson using Markdown format.
+
+Structure your response exactly like this:
+
+📚 Topic Name
+
+🧠 Concept Overview
+
+Explain simply.
+
+🔑 NEET Key Points
+
+- Point 1
+- Point 2
+- Point 3
+
+⚠ High Yield Facts
+
+- Important Fact 1
+- Important Fact 2
+
+💡 Memory Trick
+
+Provide an easy mnemonic.
+
+📝 Quick Revision
+
+2–3 line summary.
+
+🎯 NEET Tip
+
+Exam-oriented advice.
+
+❓ Recall Questions
+
+1. Question
+2. Question
+3. Question
+            
+        
 
     # Solve Mode
     elif data.type == "solve":
