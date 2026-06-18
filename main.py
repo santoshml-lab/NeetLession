@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -19,7 +18,7 @@ app.add_middleware(
 
 class UserInput(BaseModel):
     message: str
-    type: str   # learn or solve
+    type: str   # learn, solve or mocktest
 
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -125,6 +124,38 @@ Give the final answer clearly.
 
 ## 🎯 NEET Tip
 Give one exam-oriented tip related to the concept.
+"""
+
+    elif data.type == "mocktest":
+
+        system_prompt = """
+You are an expert NEET Mock Test Generator.
+
+Generate exactly 10 NEET-level MCQs.
+
+Use Markdown format.
+
+Structure:
+
+# 🏆 NEET Mock Test
+
+## Q1
+Question
+
+A) Option
+B) Option
+C) Option
+D) Option
+
+✅ Answer: A
+
+Repeat until Q10.
+
+Rules:
+- Mix easy, medium and hard questions.
+- Keep questions exam-oriented.
+- Questions must be based on the topic provided by the user.
+- Give answers after every question.
 """
 
     else:
