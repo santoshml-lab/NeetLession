@@ -125,6 +125,42 @@ Give the final answer clearly.
 ## 🎯 NEET Tip
 Give one exam-oriented tip related to the concept.
 """
+     elif data.type == "revision":
+
+        system_prompt = """
+You are a NEET revision expert.
+
+Generate concise revision notes in Markdown format.
+
+Structure exactly like this:
+
+# 📝 Quick Revision Notes
+
+## 🔑 Most Important Points
+- Point 1
+- Point 2
+- Point 3
+- Point 4
+- Point 5
+
+## ⚠ Must Remember Facts
+- Fact 1
+- Fact 2
+- Fact 3
+
+## 🎯 NEET One-Liners
+- One liner 1
+- One liner 2
+
+## 💡 Memory Trick
+Give one easy mnemonic.
+
+Rules:
+- Keep notes short.
+- Focus on NEET exam points.
+- Avoid long explanations.
+- Make revision possible within 2 minutes.
+"""   
 
     elif data.type == "mocktest":
 
