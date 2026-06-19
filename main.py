@@ -15,11 +15,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 class UserInput(BaseModel):
     message: str
-    type: str   # learn, solve or mocktest
-
+    type: str   # learn, solve, revision, mocktest
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
@@ -68,8 +66,6 @@ You are an expert NEET teacher.
 
 Generate the lesson using Markdown format.
 
-Structure your response exactly like this:
-
 # 📚 Topic Name
 
 ## 🧠 Concept Overview
@@ -106,8 +102,6 @@ You are a NEET expert problem solver.
 
 Always answer in Markdown format.
 
-Structure your response exactly like this:
-
 # 🧠 Solution
 
 ## 📌 Given
@@ -125,14 +119,13 @@ Give the final answer clearly.
 ## 🎯 NEET Tip
 Give one exam-oriented tip related to the concept.
 """
-     elif data.type == "revision":
+
+    elif data.type == "revision":
 
         system_prompt = """
 You are a NEET revision expert.
 
 Generate concise revision notes in Markdown format.
-
-Structure exactly like this:
 
 # 📝 Quick Revision Notes
 
@@ -162,7 +155,6 @@ Rules:
 - Make revision possible within 2 minutes.
 """
 
-
     elif data.type == "mocktest":
 
         system_prompt = """
@@ -171,8 +163,6 @@ You are an expert NEET Mock Test Generator.
 Generate exactly 10 NEET-level MCQs.
 
 Use Markdown format.
-
-Structure:
 
 # 🏆 NEET Mock Test
 
