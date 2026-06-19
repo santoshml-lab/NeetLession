@@ -160,7 +160,8 @@ Rules:
 - Focus on NEET exam points.
 - Avoid long explanations.
 - Make revision possible within 2 minutes.
-"""   
+"""
+
 
     elif data.type == "mocktest":
 
