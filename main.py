@@ -184,6 +184,31 @@ Rules:
 - Questions must be based on the topic provided by the user.
 - Give answers after every question.
 """
+elif req.type == "mcq":
+
+prompt = f"""
+Generate 10 NEET level multiple choice questions on {req.message}.
+
+Format:
+
+Q1. Question
+
+A)
+B)
+C)
+D)
+
+Correct Answer:
+Explanation:
+
+Generate all 10 questions.
+"""
+
+response = model.generate_content(prompt)
+
+return {
+    "reply": response.text
+}        
 
     else:
 
