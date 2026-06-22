@@ -184,9 +184,9 @@ Rules:
 - Questions must be based on the topic provided by the user.
 - Give answers after every question.
 """
-elif req.type == "mcq":
+elif data.type == "mcq":
 
-prompt = f"""
+system_?prompt = f"""
 Generate 10 NEET level multiple choice questions on {req.message}.
 
 Format:
