@@ -45,7 +45,7 @@ return response.json()["choices"][0]["message"]["content"]
 @app.post("/ai")
 def ai_endpoint(data: UserInput):
 
-if data.type == "learn":
+    if data.type == "learn":      
     system_prompt = "You are an expert NEET teacher. Generate a complete NEET lesson in Markdown format."
 
 elif data.type == "solve":
