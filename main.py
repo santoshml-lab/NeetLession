@@ -157,6 +157,7 @@ except Exception as e:
 
 @app.get("/")
 def home():
+
 return {
-"message": "NEET Hub API is running 🚀"
+    "message": "NEET Hub API is running 🚀"
 }
