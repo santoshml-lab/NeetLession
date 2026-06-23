@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -37,12 +36,7 @@ payload = {
     ]
 }
 
-response = requests.post(
-    url,
-    json=payload,
-    headers=headers
-)
-
+response = requests.post(url, json=payload, headers=headers)
 response.raise_for_status()
 
 return response.json()["choices"][0]["message"]["content"]
@@ -51,113 +45,32 @@ return response.json()["choices"][0]["message"]["content"]
 def ai_endpoint(data: UserInput):
 
 if data.type == "learn":
-
-    system_prompt = """
-
-You are an expert NEET teacher.
-Generate a complete NEET lesson in Markdown format.
-"""
+    system_prompt = "You are an expert NEET teacher. Generate a complete NEET lesson in Markdown format."
 
 elif data.type == "solve":
+    system_prompt = "You are a NEET expert problem solver. Give step-by-step solution."
 
-    system_prompt = """
+elif data.type == "revision":
+    system_prompt = "You are a NEET revision expert. Generate short revision notes."
 
-You are a NEET expert problem solver.
-
-Provide:
-
-- Given
-
-- Steps
-
-- Formula Used
-
-- Final Answer
-
-- NEET Tip
-  """
-  
-  elif data.type == "revision":
-  
-    system_prompt = """
-
-You are a NEET revision expert.
-
-Generate short revision notes with:
-
-- Key Points
-
-- Important Facts
-
-- One Liners
-
-- Memory Tricks
-  """
-  
-  elif data.type == "mocktest":
-  
-    system_prompt = """
-
-Generate exactly 10 NEET Mock Test MCQs.
-
-For every question provide:
-Question
-A)
-B)
-C)
-D)
-
-Answer
-"""
+elif data.type == "mocktest":
+    system_prompt = "Generate exactly 10 NEET mock test MCQs with answers."
 
 elif data.type == "mcq":
-
-    system_prompt = """
-
-Generate exactly 10 NEET MCQs.
-
-For every question provide:
-
-Q1.
-Question
-
-A)
-B)
-C)
-D)
-
-Correct Answer:
-Explanation:
-
-Repeat until Q10.
-"""
+    system_prompt = "Generate exactly 10 NEET MCQs with correct answers and explanations."
 
 else:
-
-    return {
-        "error": "Invalid type"
-    }
+    return {"error": "Invalid type"}
 
 try:
-
-    reply = call_groq(
-        system_prompt,
-        data.message
-    )
-
-    return {
-        "reply": reply
-    }
+    reply = call_groq(system_prompt, data.message)
+    return {"reply": reply}
 
 except Exception as e:
-
-    return {
-        "error": str(e)
-    }
+    return {"error": str(e)}
 
 @app.get("/")
 def home():
-
 return {
-    "message": "NEET Hub API is running 🚀"
+"message": "NEET Hub API is running 🚀"
 }
