@@ -15,13 +15,14 @@ allow_headers=["*"],
 )
 
 class UserInput(BaseModel):
-message: str
-type: str
+    message: str
+    type: str
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 def call_groq(system_prompt, user_message):
-url = "https://api.groq.com/openai/v1/chat/completions"
+    url = "https://api.groq.com/openai/v1/chat/completions"
+
 
 headers = {
     "Authorization": f"Bearer {GROQ_API_KEY}",
@@ -69,8 +70,10 @@ try:
 except Exception as e:
     return {"error": str(e)}
 
+
 @app.get("/")
 def home():
-return {
-"message": "NEET Hub API is running 🚀"
-}
+    return {
+        "message": "NEET Hub API is running 🚀"
+    }
+
