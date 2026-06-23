@@ -216,31 +216,10 @@ Rules:
 - Include Biology, Chemistry or Physics concepts as requested.
 - Keep questions NEET oriented.
 - Give explanation after every answer.
-  """
+  """   
 
-
-
-
-Format:
-
-Q1. Question
-
-A)
-B)
-C)
-D)
-
-Correct Answer:
-Explanation:
-
-Generate all 10 questions.
-"""
-
-response = model.generate_content(prompt)
-
-return {
-    "reply": response.text
-}        
+   
+        
 
     else:
 
