@@ -1,3 +1,4 @@
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -6,258 +7,156 @@ import os
 
 app = FastAPI()
 
-# CORS
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+CORSMiddleware,
+allow_origins=[""],
+allow_credentials=True,
+allow_methods=[""],
+allow_headers=["*"],
 )
 
 class UserInput(BaseModel):
-    message: str
-    type: str   # learn, solve, revision, mocktest
+message: str
+type: str
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-
 def call_groq(system_prompt, user_message):
+url = "https://api.groq.com/openai/v1/chat/completions"
 
-    url = "https://api.groq.com/openai/v1/chat/completions"
+headers = {
+    "Authorization": f"Bearer {GROQ_API_KEY}",
+    "Content-Type": "application/json"
+}
 
-    headers = {
-        "Authorization": f"Bearer {GROQ_API_KEY}",
-        "Content-Type": "application/json"
-    }
+payload = {
+    "model": "llama-3.1-8b-instant",
+    "messages": [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_message}
+    ]
+}
 
-    payload = {
-        "model": "llama-3.1-8b-instant",
-        "messages": [
-            {
-                "role": "system",
-                "content": system_prompt
-            },
-            {
-                "role": "user",
-                "content": user_message
-            }
-        ]
-    }
+response = requests.post(
+    url,
+    json=payload,
+    headers=headers
+)
 
-    response = requests.post(
-        url,
-        json=payload,
-        headers=headers
-    )
+response.raise_for_status()
 
-    response.raise_for_status()
-
-    return response.json()["choices"][0]["message"]["content"]
-
+return response.json()["choices"][0]["message"]["content"]
 
 @app.post("/ai")
 def ai_endpoint(data: UserInput):
 
-    if data.type == "learn":
+if data.type == "learn":
 
-        system_prompt = """
+    system_prompt = """
+
 You are an expert NEET teacher.
-
-Generate the lesson using Markdown format.
-
-# 📚 Topic Name
-
-## 🧠 Concept Overview
-Explain simply.
-
-## 🔑 NEET Key Points
-- Point 1
-- Point 2
-- Point 3
-
-## ⚠ High Yield Facts
-- Important Fact 1
-- Important Fact 2
-
-## 💡 Memory Trick
-Provide an easy mnemonic.
-
-## 📝 Quick Revision
-2–3 line summary.
-
-## 🎯 NEET Tip
-Exam-oriented advice.
-
-## ❓ Recall Questions
-1. Question
-2. Question
-3. Question
+Generate a complete NEET lesson in Markdown format.
 """
 
-    elif data.type == "solve":
+elif data.type == "solve":
 
-        system_prompt = """
+    system_prompt = """
+
 You are a NEET expert problem solver.
 
-Always answer in Markdown format.
+Provide:
 
-# 🧠 Solution
+- Given
 
-## 📌 Given
-State the information given in the question.
+- Steps
 
-## ✏️ Steps
-Show the solution step-by-step.
+- Formula Used
 
-## 🧮 Formula Used
-Mention the formula if applicable.
+- Final Answer
 
-## ✅ Final Answer
-Give the final answer clearly.
+- NEET Tip
+  """
+  
+  elif data.type == "revision":
+  
+    system_prompt = """
 
-## 🎯 NEET Tip
-Give one exam-oriented tip related to the concept.
-"""
-
-    elif data.type == "revision":
-
-        system_prompt = """
 You are a NEET revision expert.
 
-Generate concise revision notes in Markdown format.
+Generate short revision notes with:
 
-# 📝 Quick Revision Notes
+- Key Points
 
-## 🔑 Most Important Points
-- Point 1
-- Point 2
-- Point 3
-- Point 4
-- Point 5
+- Important Facts
 
-## ⚠ Must Remember Facts
-- Fact 1
-- Fact 2
-- Fact 3
+- One Liners
 
-## 🎯 NEET One-Liners
-- One liner 1
-- One liner 2
+- Memory Tricks
+  """
+  
+  elif data.type == "mocktest":
+  
+    system_prompt = """
 
-## 💡 Memory Trick
-Give one easy mnemonic.
+Generate exactly 10 NEET Mock Test MCQs.
 
-Rules:
-- Keep notes short.
-- Focus on NEET exam points.
-- Avoid long explanations.
-- Make revision possible within 2 minutes.
+For every question provide:
+Question
+A)
+B)
+C)
+D)
+
+Answer
 """
 
-    elif data.type == "mocktest":
+elif data.type == "mcq":
 
     system_prompt = """
 
-You are an expert NEET Mock Test Generator.
+Generate exactly 10 NEET MCQs.
 
-Generate exactly 10 NEET-level MCQs.
+For every question provide:
 
-Use Markdown format.
-
-🏆 NEET Mock Test
-
-Q1
-
+Q1.
 Question
 
-A) Option
-B) Option
-C) Option
-D) Option
+A)
+B)
+C)
+D)
 
-✅ Answer: A
-
-Repeat until Q10.
-
-Rules:
-
-- Mix easy, medium and hard questions.
-
-- Keep questions exam-oriented.
-
-- Questions must be based on the topic provided by the user.
-
-- Give answers after every question.
-  """
-  
-  elif data.type == "mcq":
-  
-    system_prompt = """
-
-You are an expert NEET MCQ Generator.
-
-Generate exactly 10 NEET-level MCQs.
-
-Use Markdown format.
-
-🧠 NEET MCQ Practice
-
-Q1
-
-Question
-
-A) Option
-B) Option
-C) Option
-D) Option
-
-✅ Correct Answer:
-📖 Explanation:
+Correct Answer:
+Explanation:
 
 Repeat until Q10.
+"""
 
-Rules:
+else:
 
-- Questions must be based on the subject provided by the user.
-- Include Biology, Chemistry or Physics concepts as requested.
-- Keep questions NEET oriented.
-- Give explanation after every answer.
-  """
+    return {
+        "error": "Invalid type"
+    }
 
-        
-  
+try:
 
-   
-        
+    reply = call_groq(
+        system_prompt,
+        data.message
+    )
 
-    else:
+    return {
+        "reply": reply
+    }
 
-        return {
-            "error": "Invalid type"
-        }
+except Exception as e:
 
-    try:
-
-        reply = call_groq(
-            system_prompt,
-            data.message
-        )
-
-        return {
-            "reply": reply
-        }
-
-    except Exception as e:
-
-        return {
-            "error": str(e)
-        }
-
+    return {
+        "error": str(e)
+    }
 
 @app.get("/")
 def home():
-
-    return {
-        "message": "NEET Hub API is running 🚀"
-    }
+return {
+"message": "NEET Hub API is running 🚀"
+}
