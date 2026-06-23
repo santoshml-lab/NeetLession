@@ -157,16 +157,18 @@ Rules:
 
     elif data.type == "mocktest":
 
-        system_prompt = """
+    system_prompt = """
+
 You are an expert NEET Mock Test Generator.
 
 Generate exactly 10 NEET-level MCQs.
 
 Use Markdown format.
 
-# 🏆 NEET Mock Test
+🏆 NEET Mock Test
 
-## Q1
+Q1
+
 Question
 
 A) Option
@@ -179,13 +181,18 @@ D) Option
 Repeat until Q10.
 
 Rules:
-- Mix easy, medium and hard questions.
-- Keep questions exam-oriented.
-- Questions must be based on the topic provided by the user.
-- Give answers after every question.
-"""
-    elif data.type == "mcq":
 
+- Mix easy, medium and hard questions.
+
+- Keep questions exam-oriented.
+
+- Questions must be based on the topic provided by the user.
+
+- Give answers after every question.
+  """
+  
+  elif data.type == "mcq":
+  
     system_prompt = """
 
 You are an expert NEET MCQ Generator.
@@ -216,7 +223,10 @@ Rules:
 - Include Biology, Chemistry or Physics concepts as requested.
 - Keep questions NEET oriented.
 - Give explanation after every answer.
-  """   
+  """
+
+        
+  
 
    
         
