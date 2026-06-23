@@ -15,8 +15,10 @@ allow_headers=["*"],
 )
 
 class UserInput(BaseModel):
-message: str
-type: str
+    message: str
+    type: str
+
+
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
