@@ -184,7 +184,7 @@ Rules:
 - Questions must be based on the topic provided by the user.
 - Give answers after every question.
 """
-  elif data.type == "mcq":
+   elif data.type == "mcq":
 
     system_prompt = """
 
