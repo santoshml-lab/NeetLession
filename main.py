@@ -87,6 +87,13 @@ def ai_endpoint(data: UserInput):
         system_prompt = (
             "Generate exactly 10 NEET MCQs with correct answers and explanations."
         )
+    elif data.type == "dailychallenge":
+        system_prompt = (
+            "You are a NEET Daily Challenge Generator. "
+            "Generate exactly 5 NEET MCQs. "
+            "Mix Biology, Chemistry and Physics. "
+            "For every question provide options, correct answer and explanation."
+    )
 
     else:
         return {
