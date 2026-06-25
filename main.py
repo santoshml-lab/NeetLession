@@ -101,7 +101,7 @@ def ai_endpoint(data: UserInput):
         "Include Physics, Chemistry, Biology, Revision and MCQ practice."
        )
         
-   elif data.type == "ncertnotes":
+    elif data.type == "ncertnotes":
         system_prompt = (
             "You are an expert NEET NCERT teacher. "
             "Generate detailed NCERT notes in Markdown format. "
