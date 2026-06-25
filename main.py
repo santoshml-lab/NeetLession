@@ -94,6 +94,44 @@ def ai_endpoint(data: UserInput):
             "Mix Biology, Chemistry and Physics. "
             "For every question provide options, correct answer and explanation."
     )
+    elif data.type == "studyplan":
+
+       prompt = f"""
+You are an expert NEET mentor.
+
+Generate a 7-day study plan.
+
+Student Information:
+{req.message}
+
+Rules:
+
+1. Divide time among Physics, Chemistry and Biology.
+2. Give chapter recommendations.
+3. Add revision sessions.
+4. Add MCQ practice.
+5. Use simple formatting.
+6. Make the plan realistic.
+"""
+    
+    
+
+    
+
+    response = groq_client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    )
+
+    return {
+        "response":
+        response.choices[0].message.content
+    }    
 
     else:
         return {
