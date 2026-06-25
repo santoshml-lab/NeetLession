@@ -93,13 +93,13 @@ def ai_endpoint(data: UserInput):
             "Generate exactly 5 NEET MCQs. "
             "Mix Biology, Chemistry and Physics. "
             "For every question provide options, correct answer and explanation."
-    )
+       )
     elif data.type == "studyplan":
         system_prompt = (
         "You are an expert NEET mentor. "
         "Generate a realistic 7-day NEET study plan. "
         "Include Physics, Chemistry, Biology, Revision and MCQ practice."
-    )
+       )
 
        
 
