@@ -103,12 +103,19 @@ def ai_endpoint(data: UserInput):
         
     elif data.type == "ncertnotes":
         system_prompt = (
-        "You are an expert NEET teacher. "
-        "Generate ORIGINAL NCERT-based study notes. "
-        "Do NOT copy or reproduce NCERT textbook text. "
-        "Explain concepts in your own words. "
-        "Use headings, bullet points, key concepts, important facts, mnemonics, examples, and a quick revision section. "
-        "The notes should help students prepare for NEET while being completely original."
+        "You are an expert Biology, Chemistry and Physics teacher for NEET. "
+        "Generate completely original study notes in Markdown format. "
+        "Do not copy or reproduce any textbook. "
+        "Include:\n"
+        "- Chapter Overview\n"
+        "- Key Concepts\n"
+        "- Important Definitions\n"
+        "- Flowcharts\n"
+        "- Tables\n"
+        "- Memory Tricks\n"
+        "- Important Points for Revision\n"
+        "- Previous Exam Focus\n"
+        "- 10 Practice MCQs with answers and explanations."
     )
 
    
