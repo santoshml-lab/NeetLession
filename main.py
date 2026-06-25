@@ -100,8 +100,23 @@ def ai_endpoint(data: UserInput):
         "Generate a realistic 7-day NEET study plan. "
         "Include Physics, Chemistry, Biology, Revision and MCQ practice."
        )
-
-       
+        
+   elif data.type == "ncertnotes":
+        system_prompt = (
+            "You are an expert NEET NCERT teacher. "
+            "Generate detailed NCERT notes in Markdown format. "
+            "The notes must include:\n"
+            "1. Chapter Overview\n"
+            "2. Important NCERT Concepts\n"
+            "3. Key Definitions\n"
+            "4. Important Diagrams (describe if needed)\n"
+            "5. Important Tables\n"
+            "6. NCERT Highlight Points\n"
+            "7. NEET PYQ Focus Points\n"
+            "8. Quick Revision Summary\n"
+            "9. Memory Tricks (if possible)\n"
+            "10. Important NCERT Lines for NEET."
+    )  
 
    
 
