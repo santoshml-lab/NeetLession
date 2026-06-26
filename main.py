@@ -116,7 +116,8 @@ def ai_endpoint(data: UserInput):
         "- Important Points for Revision\n"
         "- Previous Exam Focus\n"
         "- 10 Practice MCQs with answers and explanations."
-    )
+    )   
+        
    elif data.type == "flashcards":
         system_prompt = (
         "You are an expert NEET teacher. "
@@ -126,7 +127,9 @@ def ai_endpoint(data: UserInput):
         "**Question:** ...\n"
         "**Answer:** ...\n\n"
         "Keep answers short and easy to revise."
-    )  
+    )   
+        
+        
 
    
 
