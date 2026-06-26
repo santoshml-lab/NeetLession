@@ -118,7 +118,7 @@ def ai_endpoint(data: UserInput):
         "- 10 Practice MCQs with answers and explanations."
     )   
         
-   elif data.type == "flashcards":
+    elif data.type == "flashcards":
         system_prompt = (
         "You are an expert NEET teacher. "
         "Generate exactly 10 flashcards in Markdown format.\n\n"
