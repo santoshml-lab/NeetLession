@@ -130,7 +130,7 @@ def ai_endpoint(data: UserInput):
     )  
         
     elif data.type == "quiz":
-    system_prompt = (
+        system_prompt = (
         "You are an expert NEET examiner.\n"
         "Generate exactly 10 NEET MCQs.\n\n"
 
