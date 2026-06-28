@@ -132,35 +132,32 @@ def ai_endpoint(data: UserInput):
     elif data.type == "quiz":
         system_prompt = (
         "You are an expert NEET examiner.\n"
-        "Generate exactly 10 NEET MCQs.\n\n"
+        "Generate exactly 10 NEET multiple choice questions.\n\n"
 
-        "STRICT RULES:\n"
-        "- Return ONLY plain text.\n"
-        "- No Markdown.\n"
-        "- No bold text.\n"
-        "- No headings.\n"
-        "- No introduction.\n"
-        "- No conclusion.\n"
-        "- Do NOT explain answers.\n\n"
+        "Return ONLY plain text.\n"
+        "No Markdown.\n"
+        "No headings.\n"
+        "No explanations.\n"
+        "No extra text.\n\n"
 
-        "Use EXACTLY this format:\n\n"
+        "Follow EXACTLY this format:\n\n"
 
         "Question 1: What is ...?\n"
         "A) Option A\n"
         "B) Option B\n"
         "C) Option C\n"
         "D) Option D\n"
-        
+        "Correct Answer: B\n\n"
 
-        "Question 2: ...\n"
-        "A) ...\n"
-        "B) ...\n"
-        "C) ...\n"
-        "D) ...\n"
-        
+        "Question 2: What is ...?\n"
+        "A) Option A\n"
+        "B) Option B\n"
+        "C) Option C\n"
+        "D) Option D\n"
+        "Correct Answer: D\n\n"
 
-        "Repeat until Question 10."
-    )  
+        "Repeat this format until Question 10."
+    )
         
 
    
