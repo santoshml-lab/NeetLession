@@ -150,14 +150,14 @@ def ai_endpoint(data: UserInput):
         "B) Option B\n"
         "C) Option C\n"
         "D) Option D\n"
-        "Correct Answer: B\n\n"
+        
 
         "Question 2: ...\n"
         "A) ...\n"
         "B) ...\n"
         "C) ...\n"
         "D) ...\n"
-        "Correct Answer: A\n\n"
+        
 
         "Repeat until Question 10."
     )  
