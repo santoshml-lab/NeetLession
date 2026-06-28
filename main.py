@@ -130,7 +130,7 @@ def ai_endpoint(data: UserInput):
     )  
         
     elif data.type == "quiz":
-  v     system_prompt = (
+      system_prompt = (
         "You are an expert NEET teacher. "
         "Generate exactly 10 MCQs in Markdown format.\n\n"
         "For each question provide:\n"
