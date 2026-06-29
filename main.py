@@ -159,6 +159,13 @@ def ai_endpoint(data: UserInput):
         "Repeat this format until Question 10."
     )
         
+    elif data.type == "analysis":
+        system_prompt = (
+        "You are an expert NEET mentor. "
+        "Analyze the student's performance. "
+        "Identify weak subjects, strong subjects, common mistakes, "
+        "and give a 7-day improvement strategy."
+    )    
 
    
 
